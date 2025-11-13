@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rocord</title>
-  <link rel="icon" type="image/png" href="https://i.postimg.cc/fyCWxM96/geulim1-removebg-preview.png" />
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/FzvxDCWP/geulim1.png" />
 
   <style>
-    /* ===== 폰트 ===== */
     @font-face {
       font-family: 'Suit';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
@@ -36,6 +35,11 @@
       box-shadow: 0 2px 25px rgba(0,0,0,0.08);
       z-index: 100;
       transition: height 0.5s ease, background 0.4s ease;
+      overflow: hidden;
+    }
+
+    header.expanded {
+      height: 220px; /* 메뉴 열릴 때 헤더 확장 높이 */
     }
 
     .header-inner {
@@ -59,7 +63,7 @@
     }
 
     .logo {
-      height: 26px;
+      height: 30px;
       transition: filter 0.4s ease;
     }
 
@@ -88,7 +92,7 @@
 
     /* ===== 메뉴 토글 ===== */
     .menu-toggle {
-      display: flex;
+      display: none; /* 기본적으로 숨김 (PC에서는 안 보임) */
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
@@ -127,12 +131,13 @@
       align-items: center;
       width: 100%;
       margin-top: 8px;
-      overflow: hidden;
-      transition: max-height 0.5s ease, opacity 0.5s ease;
+      transition: opacity 0.5s ease;
+      opacity: 0;
     }
 
     .mobile-menu.show {
       display: flex;
+      opacity: 1;
     }
 
     .mobile-menu a {
@@ -237,33 +242,6 @@
       box-shadow: 0 0 25px rgba(0,122,255,0.45);
     }
 
-    /* ===== 스크롤 화살표 ===== */
-    .scroll-indicator {
-      margin-top: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    .arrow {
-      width: 18px;
-      height: 18px;
-      border-left: 2px solid #007aff;
-      border-bottom: 2px solid #007aff;
-      transform: rotate(-45deg);
-      animation: bounce 1.6s infinite;
-    }
-
-    .arrow:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) rotate(-45deg); opacity: 0.7; }
-      50% { transform: translateY(5px) rotate(-45deg); opacity: 1; }
-    }
-
     /* ===== 카드 ===== */
     .section {
       padding: 60px 5%;
@@ -318,28 +296,16 @@
     /* ===== 반응형 ===== */
     @media (max-width: 768px) {
       nav { display: none; }
-      .overlay h2 { font-size: 1.4rem; }
-      .overlay p { font-size: 0.85rem; }
-      .overlay button { font-size: 0.9rem; padding: 10px 22px; }
-      .section {
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 10px;
-      }
-      .card {
-        min-width: 30%;
-        max-width: 30%;
-        padding: 25px 15px;
-        font-size: 0.85rem;
-      }
+      .menu-toggle { display: flex; } /* 모바일에서만 햄버거 버튼 보임 */
+      header.expanded { height: 240px; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <header id="header">
     <div class="header-inner">
       <div class="header-top">
-        <img src="https://i.postimg.cc/fyCWxM96/geulim1-removebg-preview.png" alt="Rocord Logo" class="logo">
+        <img src="https://i.postimg.cc/FzvxDCWP/geulim1.png" alt="Rocord Logo" class="logo">
         <nav>
           <a href="#about">소개</a>
           <a href="#features">기능</a>
@@ -363,30 +329,25 @@
       <img src="https://picsum.photos/id/1024/1920/1080">
       <img src="https://picsum.photos/id/1036/1920/1080">
       <div class="overlay">
-        <h2>서버의 새로운 기준, Rocord</h2>
-        <p>깔끔하고 강력한 커뮤니티 서버 플랫폼, Rocord에서 새로운 가능성을 만나보세요.</p>
+        <h2>로블록스 시스템 무배의 시작, Rocord</h2>
+        <p>1000명이 넘는 커뮤니티 서버, Rocord에서 새로운 가능성을 만나보세요.</p>
         <button onclick="scrollToSection('features')">지금 시작하기</button>
       </div>
-    </div>
-
-    <div class="scroll-indicator">
-      <div class="arrow"></div>
-      <div class="arrow"></div>
     </div>
   </div>
 
   <section id="features" class="section">
     <div class="card">
-      <h3>빠른 연결</h3>
-      <p>끊김 없는 실시간 통신으로 언제 어디서나 원활한 대화가 가능합니다.</p>
+      <h3>무료 다운로드</h3>
+      <p>로코드에서는 모든 모델을 무료배포 합니다.</p>
     </div>
     <div class="card">
       <h3>안전한 환경</h3>
-      <p>최신 보안 시스템을 통해 사용자 데이터를 안전하게 보호합니다.</p>
+      <p>바이러스 없는 안전한 파일을 제공합니다.</p>
     </div>
     <div class="card">
-      <h3>커스터마이징</h3>
-      <p>서버, 봇, 인터페이스까지 자유롭게 꾸밀 수 있는 완벽한 유연성.</p>
+      <h3>오류 수정</h3>
+      <p>시스템 적용시 오류가 생겼을때 오류를 수정해드립니다.</p>
     </div>
   </section>
 
@@ -407,9 +368,12 @@
     // 메뉴 토글
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
+    const header = document.getElementById('header');
+
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
       mobileMenu.classList.toggle('show');
+      header.classList.toggle('expanded');
     });
 
     // 복제 방지
