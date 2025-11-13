@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="https://i.postimg.cc/fyCWxM96/geulim1-removebg-preview.png" />
 
   <style>
+    /* ===== 폰트 ===== */
     @font-face {
       font-family: 'Suit';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
@@ -15,6 +16,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html, body {
       font-family: 'Suit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(180deg, #f8fafc, #edf2f7);
@@ -26,14 +28,14 @@
     /* ===== 헤더 ===== */
     header {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       background: rgba(255,255,255,0.55);
       backdrop-filter: blur(18px) saturate(150%);
       box-shadow: 0 2px 25px rgba(0,0,0,0.08);
       z-index: 100;
-      overflow: hidden;
-      transition: all 0.5s ease;
+      transition: height 0.5s ease, background 0.4s ease;
     }
 
     .header-inner {
@@ -43,8 +45,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 10px 20px;
       transition: all 0.4s ease;
+      padding: 10px 20px;
     }
 
     .header-top {
@@ -53,6 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: all 0.4s ease;
     }
 
     .logo {
@@ -96,6 +99,10 @@
       transition: 0.3s;
     }
 
+    .menu-toggle:hover {
+      background: #f1f5f9;
+    }
+
     .menu-toggle span {
       width: 26px;
       height: 3px;
@@ -114,24 +121,18 @@
       transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* 모바일 메뉴 */
     .mobile-menu {
-      display: flex;
-      justify-content: center;
+      display: none;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
       width: 100%;
-      opacity: 0;
-      max-height: 0;
-      transition: all 0.5s ease;
+      margin-top: 8px;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
     }
 
-    header.expanded {
-      height: 130px;
-    }
-    header.expanded .mobile-menu {
-      opacity: 1;
-      max-height: 60px;
+    .mobile-menu.show {
+      display: flex;
     }
 
     .mobile-menu a {
@@ -140,8 +141,11 @@
       font-weight: 500;
       background: rgba(255,255,255,0.85);
       border-radius: 14px;
-      padding: 8px 16px;
+      padding: 10px 20px;
+      width: 90%;
+      max-width: 250px;
       text-align: center;
+      margin-top: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       transition: all 0.3s;
     }
@@ -201,18 +205,50 @@
       padding: 0 20px;
     }
 
+    .overlay h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .overlay p {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 25px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .overlay button {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px 28px;
+      color: white;
+      font-weight: 600;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .overlay button:hover {
+      background: #007aff;
+      box-shadow: 0 0 25px rgba(0,122,255,0.45);
+    }
+
     /* ===== 스크롤 화살표 ===== */
     .scroll-indicator {
-      margin-top: 3px;
+      margin-top: 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0; /* 간격 줄임 */
+      gap: 0;
     }
 
     .arrow {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-left: 2px solid #007aff;
       border-bottom: 2px solid #007aff;
       transform: rotate(-45deg);
@@ -220,7 +256,7 @@
     }
 
     .arrow:nth-child(2) {
-      animation-delay: 0.15s;
+      animation-delay: 0.2s;
     }
 
     @keyframes bounce {
@@ -252,6 +288,23 @@
       transition: 0.3s;
     }
 
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+      color: #007aff;
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
     footer {
       text-align: center;
       padding: 40px;
@@ -262,13 +315,28 @@
       backdrop-filter: blur(15px);
     }
 
+    /* ===== 반응형 ===== */
     @media (max-width: 768px) {
       nav { display: none; }
+      .overlay h2 { font-size: 1.4rem; }
+      .overlay p { font-size: 0.85rem; }
+      .overlay button { font-size: 0.9rem; padding: 10px 22px; }
+      .section {
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      .card {
+        min-width: 30%;
+        max-width: 30%;
+        padding: 25px 15px;
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header id="header">
+  <header>
     <div class="header-inner">
       <div class="header-top">
         <img src="https://i.postimg.cc/fyCWxM96/geulim1-removebg-preview.png" alt="Rocord Logo" class="logo">
@@ -308,14 +376,26 @@
   </div>
 
   <section id="features" class="section">
-    <div class="card"><h3>빠른 연결</h3><p>끊김 없는 실시간 통신으로 언제 어디서나 원활한 대화가 가능합니다.</p></div>
-    <div class="card"><h3>안전한 환경</h3><p>최신 보안 시스템을 통해 사용자 데이터를 안전하게 보호합니다.</p></div>
-    <div class="card"><h3>커스터마이징</h3><p>서버, 봇, 인터페이스까지 자유롭게 꾸밀 수 있는 완벽한 유연성.</p></div>
+    <div class="card">
+      <h3>빠른 연결</h3>
+      <p>끊김 없는 실시간 통신으로 언제 어디서나 원활한 대화가 가능합니다.</p>
+    </div>
+    <div class="card">
+      <h3>안전한 환경</h3>
+      <p>최신 보안 시스템을 통해 사용자 데이터를 안전하게 보호합니다.</p>
+    </div>
+    <div class="card">
+      <h3>커스터마이징</h3>
+      <p>서버, 봇, 인터페이스까지 자유롭게 꾸밀 수 있는 완벽한 유연성.</p>
+    </div>
   </section>
 
-  <footer id="contact">© 2025 Rocord. All rights reserved.</footer>
+  <footer id="contact">
+    © 2025 Rocord. All rights reserved.
+  </footer>
 
   <script>
+    // 슬라이드
     const slides = document.querySelectorAll('.slideshow img');
     let current = 0;
     setInterval(() => {
@@ -324,13 +404,15 @@
       slides[current].classList.add('active');
     }, 4000);
 
-    const header = document.getElementById('header');
+    // 메뉴 토글
     const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
-      header.classList.toggle('expanded');
+      mobileMenu.classList.toggle('show');
     });
 
+    // 복제 방지
     document.addEventListener('keydown', e => {
       if (e.key === 'F12' || (e.ctrlKey && e.key === 'S')) e.preventDefault();
     });
