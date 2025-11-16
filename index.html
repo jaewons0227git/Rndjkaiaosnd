@@ -39,7 +39,7 @@
     }
 
     header.expanded {
-      height: 220px; /* 메뉴 열릴 때 헤더 확장 높이 */
+      height: 260px;
     }
 
     .header-inner {
@@ -49,8 +49,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      transition: all 0.4s ease;
       padding: 10px 20px;
+      transition: 0.4s;
     }
 
     .header-top {
@@ -59,12 +59,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.4s ease;
     }
 
     .logo {
       height: 30px;
-      transition: filter 0.4s ease;
+      transition: 0.4s;
     }
 
     nav {
@@ -82,6 +81,8 @@
       border-radius: 12px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       transition: 0.3s;
+      white-space: nowrap;
+      font-size: clamp(12px, 1.5vw, 16px);
     }
 
     nav a:hover {
@@ -90,9 +91,23 @@
       box-shadow: 0 4px 10px rgba(0,122,255,0.25);
     }
 
+    /* 로그인 버튼 추가 스타일 */
+    .login-btn {
+      background: #007aff;
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,122,255,0.25);
+      transition: 0.3s;
+    }
+    .login-btn:hover {
+      background: #005fcc;
+    }
+
     /* ===== 메뉴 토글 ===== */
     .menu-toggle {
-      display: none; /* 기본적으로 숨김 (PC에서는 안 보임) */
+      display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
@@ -101,10 +116,6 @@
       padding: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: 0.3s;
-    }
-
-    .menu-toggle:hover {
-      background: #f1f5f9;
     }
 
     .menu-toggle span {
@@ -131,8 +142,8 @@
       align-items: center;
       width: 100%;
       margin-top: 8px;
-      transition: opacity 0.5s ease;
       opacity: 0;
+      transition: 0.5s;
     }
 
     .mobile-menu.show {
@@ -152,7 +163,9 @@
       text-align: center;
       margin-top: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: all 0.3s;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-size: clamp(12px, 3vw, 16px);
     }
 
     .mobile-menu a:hover {
@@ -210,36 +223,19 @@
       padding: 0 20px;
     }
 
+    /* 텍스트 자동 줄임 */
     .overlay h2 {
-      font-size: 2rem;
+      font-size: clamp(18px, 4vw, 35px);
       font-weight: 700;
       margin-bottom: 14px;
       text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      white-space: nowrap;
     }
 
     .overlay p {
-      font-size: 1rem;
-      font-weight: 400;
+      font-size: clamp(12px, 2.5vw, 18px);
       margin-bottom: 25px;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .overlay button {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 10px 28px;
-      color: white;
-      font-weight: 600;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 15px rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-    }
-
-    .overlay button:hover {
-      background: #007aff;
-      box-shadow: 0 0 25px rgba(0,122,255,0.45);
+      white-space: nowrap;
     }
 
     /* ===== 카드 ===== */
@@ -253,72 +249,53 @@
       backdrop-filter: blur(20px) saturate(180%);
     }
 
-    .card {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 36px 26px;
-      flex: 1;
-      min-width: 260px;
-      max-width: 320px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-    }
-
-    .card h3 {
-      color: #007aff;
-      margin-bottom: 14px;
-      font-size: 1.1rem;
-    }
-
-    .card p {
-      color: #475569;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .card p, .card h3 {
+      white-space: nowrap;
+      font-size: clamp(12px, 2.8vw, 16px);
     }
 
     footer {
       text-align: center;
       padding: 40px;
-      font-size: 0.9rem;
+      font-size: clamp(10px, 2vw, 14px);
       color: #64748b;
-      border-top: 1px solid #e2e8f0;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(15px);
     }
 
     /* ===== 반응형 ===== */
     @media (max-width: 768px) {
       nav { display: none; }
-      .menu-toggle { display: flex; } /* 모바일에서만 햄버거 버튼 보임 */
-      header.expanded { height: 240px; }
+      .menu-toggle { display: flex; }
+      header.expanded { height: 280px; }
     }
   </style>
 </head>
+
 <body>
   <header id="header">
     <div class="header-inner">
       <div class="header-top">
         <img src="https://i.postimg.cc/FzvxDCWP/geulim1.png" alt="Rocord Logo" class="logo">
+
+        <!-- PC 네비게이션 -->
         <nav>
           <a href="#about">소개</a>
           <a href="#features">기능</a>
           <a href="#contact">문의</a>
+          <a href="/login" class="login-btn">로그인</a>
         </nav>
+
+        <!-- 모바일 햄버거 -->
         <div class="menu-toggle" id="menuToggle">
           <span></span><span></span><span></span>
         </div>
       </div>
+
+      <!-- 모바일 메뉴 -->
       <div class="mobile-menu" id="mobileMenu">
         <a href="#about">소개</a>
         <a href="#features">기능</a>
         <a href="#contact">문의</a>
+        <a href="/login" class="login-btn">로그인</a>
       </div>
     </div>
   </header>
@@ -328,6 +305,7 @@
       <img src="https://picsum.photos/id/1015/1920/1080" class="active">
       <img src="https://picsum.photos/id/1024/1920/1080">
       <img src="https://picsum.photos/id/1036/1920/1080">
+
       <div class="overlay">
         <h2>로블록스 시스템 무배의 시작, Rocord</h2>
         <p>1000명이 넘는 커뮤니티 서버, Rocord에서 새로운 가능성을 만나보세요.</p>
